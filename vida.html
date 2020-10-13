@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La vida en la Tierra</title>
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+     <style>
+    
+            body{
+                display: grid;
+                grid-template-columns: 1fr minmax(400px, 70%) 1fr;
+                /* grid-template-rows: auto minmax(200px, 30vh) auto; */
+                grid-template-areas: 
+                "img1 img1 img1"
+                ". contenido .";
+            }
+        
+            
+            #img1{
+                grid-area: img1;
+                width: 100%;
+                max-height: 300px;
+                object-fit: cover;
+            }
+            #contenido{ grid-area: contenido;
+                justify-content: center;
+                }
+               
+          
+            
+                
+   
+        img{
+        display: block;
+        width: 400px;
+        margin-right: auto;
+        margin-left: auto;
+        border-radius:20px;
+        padding:10px;
+        border:solid 5px black;
+        
+    }
+    h1{
+        text-align: center;
+        font-size: 5cm;
+        padding: 20px;
+        border-bottom:5px solid crimson;
+    }
+  
+    td,
+    th{
+        border:2px solid crimson
+    }
+          
+   p{
+    padding:10px ;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    }
+</style>
+<body>
+<h1>La vida en la Tierra</h1>
+<img id="imagen1" src="http://recursos.cnice.mec.es/biosfera/alumno/1ESO/planeta_habitado/imagenes/planetatierra.jpg" alt="vida en la tierra"> 
+<div id="contenido"><p >Hemos vivido en el planeta Tierra desde hace más de 100 billones de años, en los cuales hemos <a href="evolución.html"> evolucionado</a>
+    , cambiado como especie, adaptandonos al cambio que sufre el mundo a lo largo del tiempo, hemos creado cosas que nos explican nuestro nacimiento como especie, y hemos logrado crear muchas teorias
+    que nos explican el inicio de la vida.</p>
+    <p>Todo esto sucedio gracias al <a href="agua.html">agua</a> la cual se piensa que provino del espacio exterior,
+    pero existen muchas teorías.</p>
+    <p>Rrgrezando al tema de la evolución, no sólo Darwin estudió este tema, tambien lo hicieron múchos más científicos, pero los más importantes son:</p>
+    <ol>
+         <li>Darwin</li>
+        <li>Van Helmont</li>
+        <li>Pasteur</li>
+        <li>Oparin</li>
+        <li>Miller</li></ol>
+   
+
+    <p>muchos científicos hoy en día consideran el hecho de que pueda haber vida en el exterior del planeta, en <a href="vida extraterrestre.html">planetas.</a></p>
+    </div>
+    
+
+</body>
+</html>
