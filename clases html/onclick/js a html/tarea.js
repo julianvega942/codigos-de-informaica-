@@ -12,8 +12,8 @@ let tabla=document.querySelector("#tareas")
 function llenarTabla (){
     let contenido= "<tr><th>Materia</th><th>Descripción</th><th>Fecha</th></tr>"
     for (tarea of tareas){
-        contenido= contenido + <tr><td>${tarea.materia}</td><td>${tarea.descripción}</td>
-        <td>${tarea.fecha}</td></tr>
+        contenido= contenido + `<tr><td>${tarea.materia}</td><td>${tarea.descripción}</td>
+        <td>${tarea.fecha}</td></tr>`
     }
     tabla.innerHTML = contenido
 }
