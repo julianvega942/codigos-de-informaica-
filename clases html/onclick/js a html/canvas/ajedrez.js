@@ -5,21 +5,21 @@ ctx.fillStyle='white'
 ctx.fillRect(10, 20, 250, 220)
 ctx.strokeRect(10, 20, 250, 220)
 
-function dibujarPeon (xC, yC, r){
-    ctx.beginPath()
+function dibujarPeon (xC, yC, tam){
+    ctx.beginPath() 
     ctx.strokeStyle='black'
     ctx.fillStyle='black'
 
     ctx.moveTo(xC,yC)
-    ctx.lineTo(xC-10,yC+25)
-    ctx.lineTo(xC+10, yC+25)
+    ctx.lineTo(xC-tam,yC+(tam*5/2))
+    ctx.lineTo(xC+tam, yC+(tam*5/2))
     ctx.lineTo(xC,yC)
 
     ctx.stroke()
     ctx.fill()
 
     ctx.beginPath()
-    ctx.arc(xC, yC, r, 0, 2*Math.PI)
+    ctx.arc(xC, yC, tam, 0, 2*Math.PI)
 
     ctx.stroke()
     ctx.fill()
