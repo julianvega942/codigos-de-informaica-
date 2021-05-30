@@ -62,8 +62,8 @@ function cambiarColorPelota(){
 window.onclick = function(event){
 
     let distanciaX= event.offsetX 
-    let distanciaY = event.offsetY
-  distancia = Math.sqrt (Math.pow (distanciaX - x,2) + Math.pow (distanciaY - y,2))
+    let distanceY = event.offsetY
+  distancia = Math.sqrt (Math.pow (distanciaX - x,2) + Math.pow (distanceY - y,2))
     if (distancia <= r){
 
         cambiarColorPelota()
