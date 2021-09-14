@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        @font-face {
+            font-family: "graffiti";
+            src: url("fonts/aAttackGraffiti.ttf");
+        }
+        html{
+            font-family: "graffiti";
+        }
+        body{
+            margin: 0;
+        }
+        canvas {
+            border: 1px solid #d3d3d3;
+            background-color: #f1f1f1;
+            position: absolute;
+            z-index: 10;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            top: 50%;
+        }
+        .gameRules{
+            display: none;
+            position: absolute;
+            z-index: 10;
+            left: 50%;
+            transform: translate(-50%, -23%);
+            top: 23%;
+            width: 400px;
+            text-align: center;
+            font-family: fantasy;
+        }
+        .gameRules .column{
+            width: 50%;
+            float:left;
+        }
+        .gameRules .colorRow, .gameRules .keyRow{
+            display: block;
+            width: 100%;
+            text-align: left
+        }
+        .gameRules .legend{
+            display: inline-block;
+            width: 80px;
+        }
+        .gameRules .legend2{
+            display: inline-block;
+            width: 50%;
+            padding-left: 30px;
+        }
+        .gameRules .timeToWin, .gameRules .pointsToWin{
+            display: inline-block;
+        }
+        .gameRules .color{
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+        }
+        .bgGreen{
+            background-color: green;
+        }
+        .bgRed{
+            background-color: red;
+        }
+        .bgBlue{
+            background-color: blue;
+        }
+        .bgYellow{
+            background-color: yellow;
+        }
+        .gameRules .key{
+            display: inline-block;
+            width: 20px;
+            text-align: center;
+        }
+        .gameData{
+            display: none;
+            position: absolute;
+            z-index: 10;
+            left: 50%;
+            transform: translate(-50%, -80%);
+            top: 80%;
+            width: 400px;
+            text-align: center;
+            font-family: fantasy;
+        }
+        .gameData .dataBox{
+            float: left;
+            width: 50%;
+        }
+        .dataBox .userName, .dataBox .currentLvl{
+            font-size: 22px;
+        }
+        .buttonContainer{
+            position: absolute;
+            z-index: 10;
+            top: 15%;
+            left: 50%;
+            width: 250px;
+            text-align: center;
+            transform: translate(-50%, -15%);
+        }
+        button.start, button.stop, button.resume, button.restart{
+            width: 100px;
+            height: 40px;
+            display: none;
+        }
+        .menu{
+            width: 600px;
+            position: absolute;
+            z-index: 10;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            height: auto;
+            background: linear-gradient(90deg, #c1c2c4, #e6e6e8);
+            border-radius: 10px;
+        }
+        .gameImage{
+            width: 100%;
+            height: 293px;
+        }
+        .gameImage img{
+            width: 100%;
+            height: 100%;
+        }
+        .menuRow{
+            padding: 20px;
+            float: left;
+            width: 100%;
+        }
+        .menuRow label{
+            display: block;
+            margin: 5px 0;
+            font-size: 22px;
+        }
+        .lvlOption{
+            width: 30%;
+            padding: 5px;
+            margin: 15px auto;
+        }
+        .lvlOption label{
+            display: inline;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .menuContinue{
+            width: 110px;
+            margin: auto;
+            border: 1px solid black;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .menuContinue:hover{
+            background-color: black;
+            color: white;
+        }
+        video {
+            object-fit: cover;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            opacity: 0.3;
+            z-index: 1;
+        }
+        .endGameBox{
+            position: fixed;
+            background-color: black;
+            width: 100%;
+            height: 100%; 
+            z-index: 20;
+            opacity: 0.8;
+            display: none;
+        }
+        .endGame, .winGame{
+            width: 300px;
+            position: absolute;
+            z-index: 25;
+            left: 50%;
+            top: 5px;
+            transform: translate(-50%, 0);
+            text-align: center;
+            height: auto;
+            background: linear-gradient(90deg, #c1c2c4, #e6e6e8);
+            border-radius: 10px;
+            padding: 30px;
+            display: none;
+        }
+        .buttonTryAgain, .backToMenu, .newLevel{
+            width: 110px;
+            margin: 20px auto;
+            border: 1px solid black;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .buttonTryAgain:hover, .backToMenu:hover{
+            background-color: black;
+            color: white;
+        }
+        .remainingLifes{
+            font-family: arial;
+        }
+        .chooseNewLevel {
+            width: 100%;
+        }
+        .newLevel{
+            width: auto;
+        }
+    </style>
+</head>
+
+<body >
+    <!-- Main menu  -->
+    <div class="menu">
+        <h1 class="welcome">welcome to Music Party</h1>
+        <div class="gameImage">
+            <img src="./background.png">
+        </div>
+        <div class="menuRow">
+            <label for="userName">Type your name:</label>
+            <input type="text" name="userName" id="userName">
+        </div>
+        <div class="menuRow">
+            <label for="">Choose a party level:</label>
+            <div class="lvlOption">
+                <input type="radio" name="level" id="level1" value="level1">
+                <label for="level1">Rock Party</label>
+            </div>
+            <div class="lvlOption">
+                <input type="radio" name="level" id="level2" value="level2">
+                <label for="level2">Pop Party</label>
+            </div>
+            <!-- div class="lvlOption">
+                <input type="radio" name="level" id="level3" value="level3">
+                <label for="level3">Reggae Party</label>
+            </div-->
+        </div>
+        <div class="menuRow">
+            <div class="menuContinue" onclick="startGame()">Let's play</div>
+        </div>
+    </div>
+    <div class="buttonContainer">
+        <!-- Control game buttons  -->
+        <button value="start" class="start" onclick="starButton(this)">Start Game</button>
+        <button value="stop" class="stop" onclick="stopButton(this)">Pause</button>
+        <button value="Resume" class="resume" onclick="resumeButton(this)">Resume</button>
+    </div>
+    <!-- User data -->
+    <div class="gameData">
+        <div class="dataBox">
+            <div class="text">username:</div>
+            <div class="userName"></div>
+        </div>
+        <div class="dataBox">
+                <div class="text">Current level:</div>
+                <div class="currentLvl"></div>
+        </div>
+    </div>
+    <div class="gameRules">
+        <div class="dataBox">
+            <div class="text">Game rules:</div>
+        </div>
+        <div class="dataBox">
+            <div class="column">
+                <div class="colorRow">
+                    <div class="legend">Color:</div>
+                    <div class="color bgGreen"></div>
+                    <div class="color bgRed"></div>
+                    <div class="color bgBlue"></div>
+                    <div class="color bgYellow"></div>
+                </div>
+                <div class="keyRow">
+                    <div class="legend">Keyboard</div>
+                    <div class="key">A</div>
+                    <div class="key">S</div>
+                    <div class="key">D</div>
+                    <div class="key">F</div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="keyRow">
+                    <div class="legend2">Time to win:</div>
+                    <div class="timeToWin">12</div>
+                </div>
+                <div class="keyRow">
+                    <div class="legend2">Points to win:</div>
+                    <div class="pointsToWin">23</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Background video for each level-->
+    <video playsinline autoplay muted loop  id="bgvid">
+        <source src="" >
+    </video>
+
+    <!-- End game-->
+    <div class="endGameBox">
+    </div>
+    
+    <div class="endGame">
+        <h1>Lost Game!</h1>
+        <div class="remainingLifes">
+            You've <b>n</b> lifes left
+        </div>
+        <div class="buttonTryAgain" onclick="restartGame()">Try again</div>
+        <div class="backToMenu" onclick="backMenu()">Back to menu</div>
+    </div>
+    <div class="winGame">
+        <h1>You win!</h1>
+        <div class="remainingLifes">
+            You've <b>n</b> lifes left
+        </div>
+        <div class="chooseNewLevel">
+        </div>
+    </div>
+    <script src="./game.js"></script>
+    <script src="./levels.js"></script>
+    <script src="./timer.js"></script>
+</body>
+
+</html>
